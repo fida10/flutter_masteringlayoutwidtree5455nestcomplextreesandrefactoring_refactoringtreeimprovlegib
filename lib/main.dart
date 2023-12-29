@@ -79,49 +79,75 @@ class _HomePageState extends State<HomePage> {
 }
 //code is the same as the previous question
 
+// This is a custom widget that extends StatefulWidget, which means it can maintain state that can change over time.
 class ReusableButton extends StatefulWidget {
-  const ReusableButton({super.key});
+  // Constructor for this widget. It takes an optional key that can be used to control or reference this widget.
+  const ReusableButton({Key? key}) : super(key: key);
 
+  // This method is overridden from StatefulWidget. It creates the mutable state for this widget.
   @override
   State<ReusableButton> createState() => _ReusableButtonState();
 }
 
+// This is the state object for the ReusableButton widget. It's created by the createState method above.
 class _ReusableButtonState extends State<ReusableButton> {
+  // This is a state that this widget maintains. It's the number that's displayed on the button.
   int currentNumOnButton = 1;
 
+  // This method is overridden from State. It describes the part of the user interface represented by this widget.
   @override
   Widget build(BuildContext context) {
+    // Padding is a widget that insets its child by the given padding.
     return Padding(
+      // EdgeInsets.all(8.0) means to apply 8.0 pixels of padding in each direction: left, top, right, and bottom.
       padding: const EdgeInsets.all(8.0),
+      // ElevatedButton is a Material Design raised button. A filled button whose material elevates when pressed.
       child: ElevatedButton(
+        // Provides a callback that is called when the button is tapped or otherwise activated.
         onPressed: () {
+          // Call setState to indicate that this widget's state has changed. This will cause this widget to rebuild.
           setState(() {
+            // Increment the number on the button.
             currentNumOnButton++;
           });
         },
+        // This is the widget displayed on the button. It's a text widget that displays the current number.
         child: Text('${currentNumOnButton.toString()}, press to increase'),
       ),
     );
   }
 }
 
+// This is a custom widget that extends StatelessWidget, which means it's immutable and can't maintain state that can change over time.
 class ReusableTextStyle extends StatelessWidget {
+  // Constructor for this widget. It takes a key, text, color, and fontsize as parameters.
+  // The 'required' keyword means that these parameters must be provided when creating this widget.
   const ReusableTextStyle(
-      {super.key,
-      required this.text,
-      required this.color,
-      required this.fontsize});
+      {Key?
+          key, // This is an identifier for this widget. It's optional and can be used to reference this widget.
+      required this.text, // This is the text that will be displayed by this widget.
+      required this.color, // This is the color of the text.
+      required this.fontsize}) // This is the size of the text.
+      : super(
+            key:
+                key); // This calls the constructor of the superclass (StatelessWidget) with the provided key.
 
+  // These are properties of this widget. They're final because this widget is immutable.
   final String text;
   final Color color;
   final double fontsize;
 
+  // This method is overridden from StatelessWidget. It describes the part of the user interface represented by this widget.
   @override
   Widget build(BuildContext context) {
+    // Text is a widget that displays a short, simple piece of text.
     return Text(
-      text,
+      text, // This is the text that will be displayed.
       style: TextStyle(
-          fontSize: fontsize, fontWeight: FontWeight.bold, color: color),
+          // TextStyle is a way to describe the style of the text.
+          fontSize: fontsize, // This sets the size of the text.
+          fontWeight: FontWeight.bold, // This makes the text bold.
+          color: color), // This sets the color of the text.
     );
   }
 }
